@@ -1,0 +1,16 @@
+<view class="bg-gradual-blue flex solid-bottom padding-sm justify-star align-center" style="width:90%">
+  <view class="padding-right" bindtap="back">
+    <text class="cuIcon-back text-white"></text>
+  </view>
+  <view>
+    <text class="text-white">好友详情</text>
+  </view>
+</view>
+<view class="detail bg-white radius shadow">
+  <view class="cu-list menu">
+    <view class="cu-item" wx:for="{{dataList}}" wx:key="{{index}}">
+      <view class="datetime">{{dateList[index]}}</view>
+      <view class="data">{{item.t_weight}} KG</view>
+    </view>
+  </view>
+</view>

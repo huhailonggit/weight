@@ -1,0 +1,30 @@
+page{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.detail{
+  width: 90%;
+  height: 70%;
+}
+.item{
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10rpx;
+  border-bottom: 2rpx solid darkgray;
+}
+.datetime{
+  color: darkgray;
+  font-size: 13pt;
+}
+.data{
+  font-size: 13pt;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}

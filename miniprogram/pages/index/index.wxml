@@ -1,0 +1,73 @@
+<view class="mybg bg-white light">
+  <view class="clock round bg-gradual-blue shadow-lg" bindtap="clockCard">
+    <text wx:if="{{!status}}" class="" style="font-size: 16pt;">打卡</text>
+    <text wx:if="{{status}}" class="" style="font-size: 16pt;">已打卡</text>
+    <text wx:if="{{!status}}" class="padding-xs">{{todayDate}}</text>
+    <text wx:if="{{status}}" class="padding-xs">{{weight}} kg</text>
+    <image wx:if="{{!status}}" src="../../images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+  </view>
+  <text wx:if="{{status}}" class="padding text-blue" bindtap="dkagain">重新打卡</text>
+</view>
+<!-- 打卡模态框 -->
+<form bindsubmit="daka">
+  <view class="cu-modal {{isDk ? 'show' : ''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar justify-end">
+        <view class="content text-shadow text-blue">打卡</view>
+        <view class="action" data-type="daka" bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="cu-form-group margin-top">
+        <input name="t_weight" type="text" bindblur="iosbug" placeholder="输入体重(kg)"/>
+        <text> KG</text>
+      </view>
+      <view class="padding">
+        <button class="cu-btn round bg-gradual-blue" form-type="submit">确定</button>
+      </view>
+    </view>
+  </view>
+</form>
+<!-- 重新打卡 -->
+<form bindsubmit="dka">
+  <view class="cu-modal {{isDka ? 'show' : ''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar justify-end">
+        <view class="content text-shadow text-blue">打卡</view>
+        <view class="action" data-type='daka' bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="cu-form-group margin-top">
+        <input name="t_weight" type="text" bindblur="iosbug" placeholder="输入体重(kg)"/>
+        <text> KG</text>
+      </view>
+      <view class="padding">
+        <button class="cu-btn round bg-gradual-blue" form-type="submit">确定</button>
+      </view>
+    </view>
+  </view>
+</form>
+<!-- 加载动画 -->
+<view class="cu-load load-modal" wx:if="{{showLoading}}">
+  <image
+   src="../../images/loading.png" mode="aspectFit"></image>
+  <view class="gray-text text-black">请稍等...</view>
+</view>
+<!-- 打卡非法 -->
+<view class="cu-modal {{showError ? 'show' : ''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar justify-end">
+      <view class="content text-shadow text-blue">提示</view>
+      <view class="action" data-type="error" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="cu-form-group margin-top flex justify-center">
+      <text class="text-orange">{{errorMessage}}</text>
+    </view>
+    <view class="padding">
+      <button class="cu-btn round bg-gradual-blue" data-type="error" bindtap="hideModal">确定</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,43 @@
+<view class="addu margin" style="width:90%">
+  <form bindsubmit="getUser">
+    <view class="cu-form-group shadow" style="width:100%">
+        <view bindtap="back">
+          <text class="cuIcon-back padding-right"></text>
+        </view>
+				<input style="width:80%" placeholder="输入好友P号" name="userid"></input>
+				<button form-type="submit" style="width:20%" class='cu-btn bg-gradual-blue round'>
+          <text class="cuIcon-search"></text>
+        </button>
+			</view>
+  </form>
+  <view class="result padding">
+    <view class="user" wx:if="{{userData != null}}">
+      <image src="{{userData.avatarUrl}}" style="width:150rpx; height:150rpx"></image>
+      <view class="username padding text-xxl">{{userData.user_name}}</view>
+      <view class="text padding-bottom">{{userData.mark}}</view>
+      <button class="cu-btn round bg-red" wx:if="{{!isAdd}}" bindtap="addUser">关注</button>
+      <button disabled="true" class="cu-btn round bg-grey padding" size="mini" class="cu-btn round" type="primary" wx:if="{{isAdd}}">已关注</button>
+    </view>
+  </view>
+</view>
+<view class="cu-load load-modal" wx:if="{{showLoading}}">
+  <image src="../../images/loading.png" mode="aspectFit"></image>
+  <view class="gray-text text-black">请稍等...</view>
+</view>
+<!-- 未搜索到用户时 -->
+<view class="cu-modal {{showError ? 'show' : ''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar justify-end">
+      <view class="content text-shadow text-blue">提示</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="cu-form-group margin-top flex justify-center">
+      <text class="text-grey">{{errorMessage}}</text>
+    </view>
+    <view class="padding">
+      <button class="cu-btn round bg-gradual-blue" bindtap="hideModal">确定</button>
+    </view>
+  </view>
+</view>

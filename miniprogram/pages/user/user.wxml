@@ -1,0 +1,242 @@
+<view class="user">
+  <view class="userCard bg-gradual-blue">
+    <view class="userId text-white padding-top margin-top" bindtap="updatePNumber">
+      <text>P: {{user_id}}</text>
+    </view>
+    <view class="avator">
+      <image wx:if="{{isLogin}}" src="{{userInfo.avatarUrl}}"></image>
+      <image wx:if="{{!isLogin}}" src="{{avatarUrl}}"></image>
+    </view>
+    <view class="userInfo" wx:if="{{isLogin}}">
+      <view class="userName text-shadow text-white">{{userInfo.nickName}}</view>
+      <view class="selfinfo" bindtap="edit">
+        <text class="text-white">{{mark}}</text>
+      </view>
+    </view>
+    <view class="padding">
+      <button class="cu-btn round" wx:if="{{!isLogin}}" bindtap="login"><text>登录</text></button>
+    </view>
+    <image src="../../images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+  </view>
+  <view class="padding flex text-center text-grey bg-white shadow shadow-warp">
+    <view class="flex flex-sub flex-direction solid-right">
+      <view class="text-xxl text-mauve">{{user_data.s_day}} <text> day</text></view>
+      <view class="margin-top-sm">
+        <text>已打卡</text></view>
+    </view>
+    <view class="flex flex-sub flex-direction solid-right">
+      <view class="text-xxl text-orange">{{user_data.now_weight}}<text> kg</text></view>
+      <view class="margin-top-sm">
+        <text>当前体重</text></view>
+    </view>
+    <view class="flex flex-sub flex-direction solid-right">
+      <view class="text-xxl text-green"><text wx:if="{{user_data.compire > 0}}">+</text>{{user_data.compire}}<text> kg</text></view>
+      <view class="margin-top-sm">
+        <text>较昨日</text></view>
+    </view>
+  </view>
+  <view class="cu-list menu margin-top-xl margin-bottom-xl shadow radius">
+    <view class="cu-item arrow" wx:if="{{isLogin}}">
+      <navigator class="content" hover-class="none" url="../addu/addu?userId={{user_id}}">
+        <text class="cuIcon-friendadd text-pink"></text>
+        <text class="text-grey">关注好友</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" hover-class="none" url="../bro/bro">
+        <text class="cuIcon-friend text-pink"></text>
+        <text class="text-grey">好友体重</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow"  wx:if="{{isLogin}}">
+      <view class="content" bindtap="about" data-type="set">
+        <text class="cuIcon-settings text-pink"></text>
+        <text class="text-grey">设置</text>
+      </view>
+    </view>
+    <view class="cu-item arrow">
+      <view class="content" bindtap="about" data-type="about">
+        <text class="cuIcon-info text-pink"></text>
+        <text class="text-grey">关于</text>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 修改跟人简介模态框 -->
+<form bindsubmit="subedit">
+  <view class="cu-modal {{updateSelfInfo ? 'show' : ''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar justify-end">
+        <view class="content text-shadow text-mauve">个人简介</view>
+        <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="cu-form-group margin-top">
+        <textarea name="selfinfo" placeholder="个人简介(不超过20字)" maxlength="20"></textarea>
+      </view>
+      <view class="subbtn">
+        <button class="cu-btn round bg-gradual-blue" form-type="submit">确定</button>
+      </view>
+    </view>
+  </view>
+</form>
+<!-- 修改P号模态框 -->
+<form bindsubmit="updateUserId">
+  <view class="cu-modal {{showUpdateP ? 'show' : ''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar justify-end">
+        <view class="content text-shadow text-blue">P号修改</view>
+        <view class="action" bindtap="hideModalByP">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="cu-form-group margin-top">
+        <input name="userid" maxlength="15" placeholder-style="color: grey;" confirm-type="go" name="userid" type="text"
+          placeholder="大于6位小于15位的英文或数字" />
+      </view>
+      <view class="subbtn">
+        <button class="cu-btn round bg-gradual-blue" form-type="submit">确定</button>
+      </view>
+    </view>
+  </view>
+</form>
+<!-- 关于弹框 -->
+<view class="cu-modal {{about ? 'show' : ''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar justify-end">
+      <view class="content text-shadow text-blue">关于</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close"></text>
+      </view>
+    </view>
+    <view class="cu-form-group flex padding justify-center">
+      <text class="text-black">https://hlovez.gitee.io</text>
+    </view>
+    <view class="subbtn">
+      <button class="cu-btn round bg-gradual-blue" bindtap="hideModal">关闭</button>
+    </view>
+  </view>
+</view>
+<!-- 设置弹框 -->
+<view class="cu-modal {{showSetting ? 'show' : ''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar justify-end">
+      <view class="content text-shadow text-blue">设置</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close"></text>
+      </view>
+    </view>
+    <view class="cu-form-group flex justify-center ">
+      <view class="cu-list menu padding-xs">
+        <view class="cu-item" bindtap="showSetting" data-set="mark">
+          <view class="content">
+            <text class="text-grey">签名修改</text>
+          </view>
+        </view>
+        <view class="cu-item" bindtap="showSetting" data-set="userid">
+          <view class="content">
+            <text class="text-grey">P号修改</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="subbtn">
+      <button class="cu-btn round bg-gradual-blue" bindtap="hideModal">关闭</button>
+    </view>
+  </view>
+</view>
+<view class="cu-load load-modal" wx:if="{{showLoading}}">
+  <image src="../../images/loading.png" mode="aspectFit"></image>
+  <view class="gray-text text-black">请稍等...</view>
+</view>
+<!-- 用户名非法提示 -->
+<view class="cu-modal {{showError ? 'show' : ''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar justify-end">
+      <view class="content text-shadow text-blue">提示</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="cu-form-group margin-top flex justify-center">
+      <text class="text-orange">{{errorMessage}}</text>
+    </view>
+    <view class="padding">
+      <button class="cu-btn round bg-gradual-blue" bindtap="hideModal">确定</button>
+    </view>
+  </view>
+</view>
+<!-- -------------------------------------------------------------------------------------------------------------------------- -->
+<!-- 通过模态框引导用户授权 -->
+<view class="cu-modal {{showDialog ? 'show' : ''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar light bg-white justify-end">
+      <view class="content text-shadow text-blue">使用说明</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl text-grey light bg-white">
+      小程序需要使您的基本信息(头像、昵称)，必须授权后才可使用，谢谢配合！-^_^-
+    </view>
+    <view class="options light bg-white">
+      <button class="cu-btn round line-blue text-blue" bindtap="refused" style="margin-right:20rpx">拒绝</button>
+      <button class="cu-btn round bg-gradual-blue" bindtap="hideModal" style="margin-right:20rpx" open-type="getUserInfo"
+        bindgetuserinfo="getUserMessage">同意</button>
+    </view>
+  </view>
+</view>
+<!-- 通过模态框引导用户授权 -->
+<view class="cu-modal {{isOk ? 'show' : ''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar light bg-white justify-end">
+      <view class="content text-shadow text-blue">提示</view>
+    </view>
+    <view class="padding-xl text-grey light bg-white">
+      您拒绝了获取权限请求所以无法使用该小程序，是否重新授权？
+    </view>
+    <view class="options light bg-white">
+      <button class="cu-btn round bg-gradual-blue" bindtap="getUserAgain">重新授权</button>
+    </view>
+  </view>
+</view>
+<!-- 加载动画 -->
+<view class="cu-load load-modal" wx:if="{{showLoading}}">
+  <image src="../../images/loading.png" mode="aspectFit"></image>
+  <view class="gray-text text-black">请稍等...</view>
+</view>
+<!-- 设置用户名 -->
+<form bindsubmit="register">
+  <view class="cu-modal {{showRegister ? 'show' : ''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar justify-end">
+        <view class="content text-shadow text-blue">设置P号</view>
+      </view>
+      <view class="cu-form-group margin-top">
+        <input maxlength="15" placeholder-style="color: grey;" confirm-type="go" name="userid" type="text"
+          placeholder="大于6位小于15位的英文或数字" />
+      </view>
+      <view class="padding">
+        <button class="cu-btn round bg-gradual-blue" form-type="submit">完成</button>
+      </view>
+    </view>
+  </view>
+</form>
+<!-- 用户名非法提示 -->
+<view class="cu-modal {{showError ? 'show' : ''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar justify-end">
+      <view class="content text-shadow text-blue">提示</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="cu-form-group margin-top flex justify-center">
+      <text class="text-orange">{{errorMessage}}</text>
+    </view>
+    <view class="padding">
+      <button class="cu-btn round bg-gradual-blue" bindtap="hideModal">确定</button>
+    </view>
+  </view>
+</view>

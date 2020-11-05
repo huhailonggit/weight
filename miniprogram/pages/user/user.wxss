@@ -1,0 +1,66 @@
+/* pages/user/user.wxss */
+.userCard{
+  width: 100%;
+  height: 440rpx;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.gif-wave{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  mix-blend-mode: screen;  
+  height: 100rpx;
+}
+.avator{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.selfinfo{
+  font-size: 10pt;
+  margin-top: 20prx;
+}
+.subbtn{
+  margin: 20rpx;
+}
+.avator image{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+}
+.userInfo{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+
+.userName{
+  font-size: 13pt;
+  padding-bottom: 10rpx;
+}
+.userId{
+  font-size: 11pt;
+  padding-left: 10rpx;
+  width: 100%;
+  text-align: left;
+}
+.menu{
+  margin: 30rpx;
+}
+.options{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 20rpx;
+}
+.dialog-btn{
+  width: 150rpx;
+}

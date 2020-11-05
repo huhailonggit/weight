@@ -1,0 +1,39 @@
+<view class="draw bg-gradual-blue margin-left margin-right margin-top light shadow-lg">
+  <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+</view>
+<view class="radius margin-bottom margin-left margin-right shadow-warp" style="width:90%">
+  <scroll-view class="listdata" scroll-y="true" style="widht:{{width}}">
+    <view class="cu-list menu">
+      <view class="cu-item" wx:for="{{dataList}}" wx:key="{{index}}">
+        <view class="content flex justify-between" hover-class="none" url="../addu/addu?userId={{user_id}}">
+          <view>
+            <text class="cuIcon-likefill text-red"></text>
+            <text class="text-grey"> {{item.t_weight}} kg</text>
+          </view>
+          <view>
+            <text class="text-grey text-sm">{{dateList[index]}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+<view class="cu-modal {{showMessage ? 'show' : ''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar justify-end">
+      <view class="content text-shadow text-blue">提示</view>
+      
+    </view>
+    <view class="cu-form-group margin-top flex justify-center">
+      <text class="text-blue">{{message}}</text>
+    </view>
+    <view class="padding">
+      <button class="cu-btn round bg-gradual-blue" bindtap="goDk">去打卡</button>
+    </view>
+  </view>
+</view>
+<!-- 加载动画 -->
+<view class="cu-load load-modal" wx:if="{{showLoading}}">
+  <image src="../../images/loading.png" mode="aspectFit"></image>
+  <view class="gray-text text-black">请稍等...</view>
+</view>

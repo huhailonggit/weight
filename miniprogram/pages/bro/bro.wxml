@@ -1,0 +1,47 @@
+<view class="bg-gradual-blue flex solid-bottom padding-sm justify-star align-center" style="width:90%">
+  <view class="padding-right" bindtap="back">
+    <text class="cuIcon-back text-white"></text>
+  </view>
+  <view>
+    <text class="text-white">好友列表</text>
+  </view>
+</view>
+<view class="bro bg-white padding-top shadow">
+  <scroll-view scroll-y="{{true}}" class="scrollH">
+    <view class="cu-list menu">
+      <view class="cu-item padding margin-bottom" bindlongtap="cacheLink" data-openid="{{item._openid}}" wx:for="{{broList}}">
+        <view class="username">
+          <image src="{{item.avatarUrl}}"></image>
+          <text class="padding-left">{{item.user_name}}</text>
+        </view>
+        <view>
+          <button class="cu-btn round bg-blue" size="mini" bindtap="toDetail" data-id="{{item._openid}}">
+            <text class="cuIcon-attentionfavor text-white"></text>
+          </button>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+<!-- 加载动画 -->
+<view class="cu-load load-modal" wx:if="{{showLoading}}">
+  <image src="../../images/loading.png" mode="aspectFit"></image>
+  <view class="gray-text text-black">请稍等...</view>
+</view>
+<!-- 删除提示 -->
+<view class="cu-modal {{showDelete ? 'show' : ''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar justify-end">
+      <view class="content text-shadow text-blue">提示</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="cu-form-group flex padding justify-center">
+      <text class="text-orange">确定删除好友？</text>
+    </view>
+    <view class="padding">
+      <button class="cu-btn round bg-gradual-blue" bindtap="delete">确定</button>
+    </view>
+  </view>
+</view>

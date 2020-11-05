@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/user/user",
+    "pages/record/record",
+    "pages/index/index",
+    "pages/detail/detail",
+    "pages/bro/bro",
+    "pages/addu/addu"
+    
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#39b54a",
+    "navigationBarTitleText": "Color UI",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "打卡",
+      "iconPath": "images/daka.png",
+      "selectedIconPath": "images/dked.png"
+    },
+    {
+      "pagePath": "pages/record/record",
+      "text": "统计",
+      "iconPath": "images/tj.png",
+      "selectedIconPath": "images/tjed.png"
+    },{
+      "pagePath": "pages/user/user",
+      "text": "我的",
+      "iconPath": "images/user.png",
+      "selectedIconPath": "images/usered.png"
+    }]
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

@@ -1,0 +1,27 @@
+/* pages/bro/bro.wxss */
+page{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.bro{
+  width: 90%;
+  height: 70%;
+}
+image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.scrollH{
+  height: 100%;
+}
+.username{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
